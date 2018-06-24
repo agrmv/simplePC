@@ -4,6 +4,7 @@
 #include "interface.h"
 #include "handler.h"
 #include "transale/asm.h"
+#include "transale/basic.h"
 
 int main(int argc, char **argv) {
     if (argc > 1) {
@@ -13,6 +14,16 @@ int main(int argc, char **argv) {
                 return 1;
             }
             if (asm_to_object(argv[2], argv[3]) == 0)
+                printf("Successful!\n");
+            else
+                printf("Fail!\n");
+            return 0;
+        } else if (strcmp(argv[1], "sbt") == 0) {
+            if (argc != 4) {
+                printf("Error\n");
+                return 1;
+            }
+            if (basic_to_asm(argv[2], argv[3]) == 0)
                 printf("Successful!\n");
             else
                 printf("Fail!\n");
