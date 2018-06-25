@@ -3,7 +3,6 @@
 #include "handler.h"
 
 int addMessage(char *message) {
-    //strcpy(IO, message);
     strcat(IO, message);
     strcat(IO, "\n");
     return 0;
@@ -27,6 +26,7 @@ void readConsoleValue(int addr, int *value) {
     drawLoadCell();
     rk_mytermregime(0, 0, 1, 1, 1);
     scanf("%X", value);
+    rk_mytermregime(0, 0, 1, 0, 0);
     if (*value < 0x7fff) {
         char print[16];
         sprintf(print, "%d<\t%0X", addr, *value);

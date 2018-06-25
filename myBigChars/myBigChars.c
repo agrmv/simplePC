@@ -40,10 +40,6 @@ int bc_box(int x1, int y1, int x2, int y2) {
 }
 
 int bc_printbigchar (int *big, int x, int y, eColors fgcolor, eColors bgcolor) {
-    int rows, cols;
-    if (mt_getscreensize(&rows, &cols) || rows < x + y || cols < x + y) {
-        return -1;
-    }
     mt_setbgcolor(bgcolor);
     mt_setfgcolor(fgcolor);
     int value;

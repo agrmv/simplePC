@@ -140,7 +140,7 @@ void handlerLoadCellMemory(int place_x, int place_y) {
 
 void handlerRun() {
     sc_regSet(FLAG_IGNORE_CLOCK, 0);
-    create_timer(1);
+    create_timer(0.1);
     printInterface();
 }
 
