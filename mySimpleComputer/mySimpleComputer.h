@@ -5,7 +5,6 @@
 #include <inttypes.h>
 #include <iso646.h>
 #include <stdbool.h>
-
 #define SIZE 100
 
 enum {
@@ -14,10 +13,11 @@ enum {
     FLAG_OVERFLOW,
     FLAG_DIV_ZERO,
     FLAG_IGNORE_CLOCK,
-    FLAGS_END    //always at the end, shows the end of the flags
+    FLAGS_END,
 };
+
 static int memory[SIZE];
-static int registr;
+static int _register;
 extern int instructionCounter;
 extern int accumulator;
 
@@ -27,8 +27,8 @@ int sc_memoryGet(int address, int* value);
 int sc_memorySave(const char *filename);
 int sc_memoryLoad(const char *filename);
 int sc_regInit();
-int sc_regSet(int flag, int value);
-int sc_regGet(int flag, int *value);
+int sc_regSet(int adress, int value);
+int sc_regGet(int adress, int *value);
 int sc_commandEncode(int command, int operand, int* value);
 int sc_commandDecode(int value, int* command, int* operand);
 int sc_isCommand(int value);

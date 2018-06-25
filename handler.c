@@ -1,4 +1,3 @@
-
 #include <myBigChars.h>
 #include "handler.h"
 #include "IO.h"
@@ -10,7 +9,6 @@ void signalhangle(int signal) {
         case SIGALRM: {
             int val;
             if (!sc_regGet(FLAG_IGNORE_CLOCK, &val) && !val) {
-                //++instructionCounter;
                 CU();
                 printInterface();
             }
@@ -82,7 +80,6 @@ void handlerKey(eKeys key) {
             break;
         case KEY_LOAD:
             handlerLoad();
-
             break;
         case KEY_SAVE:
             handlerSave();
@@ -128,7 +125,7 @@ void handlerLoadCellMemory(int place_x, int place_y) {
     char *buf = readConsole();
     if (buf) {
         int val;
-        if (decodeVal(buf, &val) == 0) {
+        if (decodeVal(buf, &val) != -1) {
             sc_memorySet(place_x * 10 + place_y, val);
         } else {
             addMessage("Could not set cell value");
@@ -152,7 +149,6 @@ void handlerQuit() {
 void handlerStep() {
     sc_regSet(FLAG_IGNORE_CLOCK, 0);
     alarm(1);
-    CU();
     printInterface();
 }
 
@@ -160,7 +156,7 @@ void handlerReset() {
     create_timer(0);
     raise(SIGUSR1);
     sc_memoryInit();
-    *IO = '\0';
+    *io_msg = '\0';
     printInterface();
 }
 
@@ -198,9 +194,7 @@ void handlerLoadAccum() {
     drawLoadCell();
     char *buf = readConsole();
     if (buf) {
-        int val;
-        if (decodeVal(buf, &val) != -1) {
-            accumulator = val;
+        if (decodeVal(buf, &accumulator) != -1) {
         } else {
             addMessage("Could not set accumulator value");
         }
@@ -213,9 +207,7 @@ void handlerLoadInstructionCounter() {
     drawLoadCell();
     char *buf = readConsole();
     if (buf) {
-        int val;
-        if (decodeVal(buf, &val) != -1) {
-            instructionCounter = val;
+        if (decodeVal(buf, &instructionCounter) != -1) {
         } else {
             addMessage("Could not set instructionCounter value");
         }

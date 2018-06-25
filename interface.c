@@ -53,7 +53,7 @@ void printInterface() {
 void printAccum() {
     printBox("Accumulator", 1, 63, 20, 3);
     mt_gotoXY(2, 71);
-    printf("%c%.4hd",(accumulator >= 0 ? '+' : '-'), abs(accumulator));
+    accumulator >= 0 ? printf("+%.4hd",accumulator) : printf("%.4hd",accumulator);
 }
 
 void printCounter() {
@@ -234,6 +234,6 @@ void drawBigChar(int address) {
 void printIO() {
     mt_gotoXY(23, 1);
     printf("I/O\n");
-    printf(IO);
+    printf(io_msg);
     fflush(stdout);
 }

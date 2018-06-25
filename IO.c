@@ -2,10 +2,9 @@
 #include "IO.h"
 #include "handler.h"
 
-int addMessage(char *message) {
-    strcat(IO, message);
-    strcat(IO, "\n");
-    return 0;
+void addMessage(char *message) {
+    strcat(io_msg, message);
+    strcat(io_msg, "\n");
 }
 
 char *readConsole() {
@@ -26,7 +25,7 @@ void readConsoleValue(int addr, int *value) {
     drawLoadCell();
     rk_mytermregime(0, 0, 1, 1, 1);
     scanf("%X", value);
-    rk_mytermregime(0, 0, 1, 0, 0);
+    rk_mytermregime(0, 0, 1, 0, 1);
     if (*value < 0x7fff) {
         char print[16];
         sprintf(print, "%d<\t%0X", addr, *value);

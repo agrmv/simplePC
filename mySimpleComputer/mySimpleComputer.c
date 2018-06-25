@@ -48,16 +48,16 @@ int sc_memoryLoad(const char *filename) {
 }
 
 int sc_regInit() {
-    return (registr = 0);
+    return (_register = 0);
 }
 
 int sc_regSet(int reg, int value) {
     if (reg < 0 || reg >= FLAGS_END)
         return 1;
     if (value == 1)
-        registr |= 1 << reg;
+        _register |= 1 << reg;
     else if (value == 0)
-        registr &= ~(1 << reg);
+        _register &= ~(1 << reg);
     else
         return 1;
     return 0;
@@ -66,7 +66,7 @@ int sc_regSet(int reg, int value) {
 int sc_regGet(int reg, int *value) {
     if (reg < 0 || reg >= FLAGS_END)
         return 1;
-    *value = (registr >> reg) & 0x1;
+    *value = (_register >> reg) & 0x1;
     return 0;
 }
 
@@ -86,12 +86,11 @@ int sc_isCommand(int value) {
 }
 
 int sc_commandDecode(int value, int *command, int *operand) {
-    if (value & ~0x3FFF) {//value & 0x4000
+    if (value & ~0x3FFF) {
         sc_regSet(FLAG_INVALID_COMMAND, 1);
         return 1;
     }
     *operand = value & 0x7F;
     *command = (value >> 7) & 0x7F;
-    //is validate operand + command;
     return 0;
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include <stdint.h>
-char IO[1024];
+char io_msg[1024];
 
-int addMessage(char *);
+void addMessage(char *);
 char *readConsole();
 void writeConsoleValue(int addr, int value);
 void readConsoleValue(int addr, int *value);
